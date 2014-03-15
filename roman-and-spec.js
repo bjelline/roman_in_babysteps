@@ -40,7 +40,7 @@ var zehnerstelle = function(zahl) {
 var convert_one_arabic_digit = function(arabic, ROMAN_DIGIT_ONE, ROMAN_DIGIT_FIVE, ROMAN_DIGIT_TEN) {
   var ROMAN_DIGIT_ZERO = "",
       roman;
-  if( Math.floor(arabic/5) == 1 ) {
+  if( arabic >= 5 ) {
     if( arabic % 5 == 4 ) {
       return ROMAN_DIGIT_ONE + ROMAN_DIGIT_TEN;
     }
