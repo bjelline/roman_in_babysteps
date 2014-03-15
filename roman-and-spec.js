@@ -1,5 +1,8 @@
 
 describe("arabic to roman numerals converter", function() {
+  it ( 'should convert 0 to nothing', function(){
+    expect(convert(0)).toBe('');
+  });
   it ( 'should convert 1 to 8', function(){
     expect(convert(1)).toBe('I');
     expect(convert(2)).toBe('II');
