@@ -3,7 +3,7 @@ describe("arabic to roman numerals converter", function() {
   it ( 'should convert 0 to nothing', function(){
     expect(convert(0)).toBe('');
   });
-  it ( 'should convert 1 to 8', function(){
+  it ( 'should convert 1 to 9 => I to IX', function(){
     expect(convert(1)).toBe('I');
     expect(convert(2)).toBe('II');
     expect(convert(3)).toBe('III');
@@ -14,6 +14,17 @@ describe("arabic to roman numerals converter", function() {
     expect(convert(8)).toBe('VIII');
     expect(convert(9)).toBe('IX');
   });
+  it ( 'should convert 10..90 (multiples of 10)', function(){
+    expect(convert(10)).toBe('X');
+    expect(convert(20)).toBe('XX');
+    expect(convert(30)).toBe('XXX');
+    expect(convert(40)).toBe('XD');
+    expect(convert(50)).toBe('D');
+    expect(convert(60)).toBe('DX');
+    expect(convert(70)).toBe('DXX');
+    expect(convert(80)).toBe('DXXX');
+    expect(convert(90)).toBe('XC');
+  });
 });
 
 
@@ -21,7 +32,6 @@ describe("arabic to roman numerals converter", function() {
 var convert_one_arabic_digit = function(arabic, ROMAN_DIGIT_ONE, ROMAN_DIGIT_FIVE, ROMAN_DIGIT_TEN) {
   var ROMAN_DIGIT_ZERO = "",
       roman;
-
   if( Math.floor(arabic/5) == 1 ) {
     if( arabic % 5 == 4 ) {
       return ROMAN_DIGIT_ONE + ROMAN_DIGIT_TEN;
@@ -56,5 +66,9 @@ var convert = function(arabic) {
       ROMAN_DIGIT_TEN  = "X",
       roman = "";
 
-   return convert_one_arabic_digit(arabic, "I", "V", "X");
+   if( arabic < 10 ) {
+      return convert_one_arabic_digit(arabic, "I", "V", "X");
+   }
+   return convert_one_arabic_digit(arabic/10, "X", "D", "C");
+
 }
