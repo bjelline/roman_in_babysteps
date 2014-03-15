@@ -12,7 +12,7 @@ describe("arabic to roman numerals converter", function() {
 });
 
 var convert = function(arabic) {
-
+  var ROMAN_DIGIT_ONE = "I";
   var roman = "";
 
   if( Math.floor(arabic/5) == 1 ) {
@@ -20,13 +20,16 @@ var convert = function(arabic) {
   }
 
   if( arabic % 5 == 1 ) {
-    roman += "I";
+    roman += ROMAN_DIGIT_ONE;
   }
   if( arabic % 5 == 2 ) {
-    roman += "II";
+    roman += ROMAN_DIGIT_ONE;
+    roman += ROMAN_DIGIT_ONE;
   }
   if( arabic % 5 == 3 ) {
-    roman += "III";
+    roman += ROMAN_DIGIT_ONE;
+    roman += ROMAN_DIGIT_ONE;
+    roman += ROMAN_DIGIT_ONE;
   }
 
   return roman;
