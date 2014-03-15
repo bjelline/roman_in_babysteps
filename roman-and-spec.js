@@ -14,22 +14,23 @@ describe("arabic to roman numerals converter", function() {
 });
 
 var convert = function(arabic) {
-  var ROMAN_DIGIT_ONE  = "I",
+  var ROMAN_DIGIT_ZERO = "",
+      ROMAN_DIGIT_ONE  = "I",
       ROMAN_DIGIT_FIVE = "V",
       ROMAN_DIGIT_TEN  = "X",
       roman = "";
 
 
   if( Math.floor(arabic/5) == 1 ) {
-    roman = "V";
     if( arabic % 5 == 4 ) {
       return ROMAN_DIGIT_ONE + ROMAN_DIGIT_TEN;
     }
+    roman = ROMAN_DIGIT_FIVE;
   } else {
-    roman = "";
     if( arabic % 5 == 4 ) {
       return ROMAN_DIGIT_ONE + ROMAN_DIGIT_FIVE;
     }
+    roman = ROMAN_DIGIT_ZERO;
   }
 
   if( arabic % 5 == 1 ) {
