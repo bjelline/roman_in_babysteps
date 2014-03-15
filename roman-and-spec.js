@@ -14,29 +14,36 @@ describe("arabic to roman numerals converter", function() {
     expect(convert(8)).toBe('VIII');
     expect(convert(9)).toBe('IX');
   });
-  it ( 'should convert 10..90 (multiples of 10)', function(){
+  it ( 'shoulL convert 10..90 (multiples of 10)', function(){
     expect(convert(10)).toBe('X');
     expect(convert(20)).toBe('XX');
     expect(convert(30)).toBe('XXX');
-    expect(convert(40)).toBe('XD');
-    expect(convert(50)).toBe('D');
-    expect(convert(60)).toBe('DX');
-    expect(convert(70)).toBe('DXX');
-    expect(convert(80)).toBe('DXXX');
+    expect(convert(40)).toBe('XL');
+    expect(convert(50)).toBe('L');
+    expect(convert(60)).toBe('LX');
+    expect(convert(70)).toBe('LXX');
+    expect(convert(80)).toBe('LXXX');
     expect(convert(90)).toBe('XC');
   });
-  it ( 'should convert all numbers < 100', function(){
-    expect(convert(42)).toBe('XDII');
+  it ( 'shoulL convert all numbers < 100', function(){
+    expect(convert(42)).toBe('XLII');
     expect(convert(99)).toBe('XCIX');
   });
   it ( 'should convert 100..900 (multiples of 100)', function(){
     expect(convert(100)).toBe('C');
-    expect(convert(400)).toBe('CL');
+    expect(convert(400)).toBe('CD');
     expect(convert(900)).toBe('CM');
   });
   it ( 'should convert all numbers < 1000', function(){
-    expect(convert(342)).toBe('CCCXDII');
-    expect(convert(9999)).toBe('CMXCIX');
+    expect(convert(342)).toBe('CCCXLII');
+    expect(convert(999)).toBe('CMXCIX');
+  });
+  it ( 'should convert all numbers < 4000', function(){
+    expect(convert(2342)).toBe('MMCCCXLII');  // Expected false to be 'MMCCCXLII'.
+    expect(convert(3999)).toBe('MMMCMXCIX');  // Expected false to be 'MMMCMXCIX'.
+  });
+  it ( 'should not convert numbers >= 4000', function(){
+    expect(convert(4000)).toBe(false);  
   });
 });
 
@@ -78,18 +85,24 @@ var convert_one_arabic_digit = function(arabic, ROMAN_DIGIT_ONE, ROMAN_DIGIT_FIV
 };
 
 var convert = function(arabic) {
-      ROMAN_DIGIT_ONE  = "I",
-      ROMAN_DIGIT_FIVE = "V",
-      ROMAN_DIGIT_TEN  = "X",
-      roman = "";
+   var roman = "";
+
+   if( arabic >= 4000 ) {
+     return false;
+   }
+
+   if( arabic >= 1000 ) {
+      roman += convert_one_arabic_digit(integer_division(arabic,1000), "M", "", "");
+      arabic  = arabic % 1000;
+   }
 
    if( arabic >= 100 ) {
-      roman += convert_one_arabic_digit(integer_division(arabic,100), "C", "L", "M");
+      roman += convert_one_arabic_digit(integer_division(arabic,100), "C", "D", "M");
       arabic  = arabic % 100;
    }
 
    if( arabic >= 10 ) {
-      roman += convert_one_arabic_digit(integer_division(arabic,10), "X", "D", "C");
+      roman += convert_one_arabic_digit(integer_division(arabic,10), "X", "L", "C");
       arabic  = arabic % 10;
    }
 
