@@ -16,6 +16,11 @@ describe("arabic to roman numerals converter", function() {
   });
 });
 
+
+
+var convert_one_arabic_digit = function(arabic, ROMAN_DIGIT_ONE, ROMAN_DIGIT_FIVE, ROMAN_DIGIT_TEN) {
+});
+
 var convert = function(arabic) {
   var ROMAN_DIGIT_ZERO = "",
       ROMAN_DIGIT_ONE  = "I",
