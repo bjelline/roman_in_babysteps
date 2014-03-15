@@ -25,9 +25,17 @@ describe("arabic to roman numerals converter", function() {
     expect(convert(80)).toBe('DXXX');
     expect(convert(90)).toBe('XC');
   });
+  it ( 'should convert all numbers < 100', function(){
+    expect(convert(42)).toBe('XDII');
+    expect(convert(99)).toBe('XCIX');
+  });
 });
 
 
+
+var zehnerstelle = function(zahl) {
+  return Math.floor(zahl/10);
+};
 
 var convert_one_arabic_digit = function(arabic, ROMAN_DIGIT_ONE, ROMAN_DIGIT_FIVE, ROMAN_DIGIT_TEN) {
   var ROMAN_DIGIT_ZERO = "",
@@ -66,9 +74,12 @@ var convert = function(arabic) {
       ROMAN_DIGIT_TEN  = "X",
       roman = "";
 
-   if( arabic < 10 ) {
-      return convert_one_arabic_digit(arabic, "I", "V", "X");
+   if( arabic >= 10 ) {
+      roman += convert_one_arabic_digit(zehnerstelle(arabic), "X", "D", "C");
+      arabic  = arabic % 10;
    }
-   return convert_one_arabic_digit(arabic/10, "X", "D", "C");
 
+   roman += convert_one_arabic_digit(arabic, "I", "V", "X");
+
+   return roman;
 }
