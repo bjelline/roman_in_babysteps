@@ -13,11 +13,12 @@ describe("arabic to roman numerals converter", function() {
 });
 
 var convert = function(arabic) {
-  var ROMAN_DIGIT_ONE = "I";
-  var roman = "";
+  var ROMAN_DIGIT_ONE = "I",
+      ROMAN_DIGIT_FIVE = "V",
+      roman = "";
 
   if( arabic % 5 == 4 ) {
-    return "IV";
+    return ROMAN_DIGIT_ONE + ROMAN_DIGIT_FIVE;
   }
 
   if( Math.floor(arabic/5) == 1 ) {
