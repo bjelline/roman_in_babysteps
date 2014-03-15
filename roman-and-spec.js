@@ -42,8 +42,8 @@ describe("arabic to roman numerals converter", function() {
 
 
 
-var zehnerstelle = function(zahl) {
-  return Math.floor(zahl/10);
+var integer_division = function(zahl, divisor) {
+  return Math.floor(zahl/divisor);
 };
 
 var convert_one_arabic_digit = function(arabic, ROMAN_DIGIT_ONE, ROMAN_DIGIT_FIVE, ROMAN_DIGIT_TEN) {
@@ -84,12 +84,12 @@ var convert = function(arabic) {
       roman = "";
 
    if( arabic >= 100 ) {
-      roman += convert_one_arabic_digit(Math.floor(arabic/100), "C", "L", "M");
+      roman += convert_one_arabic_digit(integer_division(arabic,100), "C", "L", "M");
       arabic  = arabic % 100;
    }
 
    if( arabic >= 10 ) {
-      roman += convert_one_arabic_digit(zehnerstelle(arabic), "X", "D", "C");
+      roman += convert_one_arabic_digit(integer_division(arabic,10), "X", "D", "C");
       arabic  = arabic % 10;
    }
 
