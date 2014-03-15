@@ -19,15 +19,8 @@ describe("arabic to roman numerals converter", function() {
 
 
 var convert_one_arabic_digit = function(arabic, ROMAN_DIGIT_ONE, ROMAN_DIGIT_FIVE, ROMAN_DIGIT_TEN) {
-});
-
-var convert = function(arabic) {
   var ROMAN_DIGIT_ZERO = "",
-      ROMAN_DIGIT_ONE  = "I",
-      ROMAN_DIGIT_FIVE = "V",
-      ROMAN_DIGIT_TEN  = "X",
-      roman = "";
-
+      roman;
 
   if( Math.floor(arabic/5) == 1 ) {
     if( arabic % 5 == 4 ) {
@@ -55,4 +48,13 @@ var convert = function(arabic) {
   }
 
   return roman;
+};
+
+var convert = function(arabic) {
+      ROMAN_DIGIT_ONE  = "I",
+      ROMAN_DIGIT_FIVE = "V",
+      ROMAN_DIGIT_TEN  = "X",
+      roman = "";
+
+   return convert_one_arabic_digit(arabic, "I", "V", "X");
 }
